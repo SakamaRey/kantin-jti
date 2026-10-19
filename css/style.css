@@ -148,3 +148,63 @@ button {
     background: var(--warna-utama);
     color: #fff;
 }
+
+/* ==========================================================
+   4. Kartu menu & grid
+   ========================================================== */
+.grid-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* mobile: 2 kolom */
+    gap: 14px;
+    padding-bottom: 40px;
+}
+
+.kartu-menu {
+    padding: 12px;
+    border-radius: 24px;
+    background: var(--warna-krem);
+    text-align: center;
+    transition: transform 0.15s;
+}
+
+.kartu-menu:active {
+    transform: scale(0.98);
+}
+
+.kartu-menu img {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.kartu-menu h3 {
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.kartu-menu .deskripsi {
+    min-height: 2.8em;
+    margin: 6px 0;
+    color: var(--warna-utama-terang);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.kartu-menu .harga {
+    text-align: right;
+    color: var(--warna-gelap);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Layar lebar: 4 kolom */
+@media (min-width: 768px) {
+    .grid-menu {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+}
