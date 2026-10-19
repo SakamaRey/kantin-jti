@@ -208,3 +208,129 @@ button {
         gap: 20px;
     }
 }
+
+/* ==========================================================
+   5. Navigasi & bar keranjang
+   ========================================================== */
+
+/* Ruang kosong di bawah agar konten tidak tertutup bar */
+main {
+    padding-bottom: 150px;
+}
+
+.bar-keranjang {
+    position: fixed;
+    right: 16px;
+    bottom: 88px;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px 10px 20px;
+    border-radius: 999px;
+    background: var(--warna-krem);
+    font-size: 14px;
+}
+
+.bar-keranjang strong {
+    flex: 1;
+    color: var(--warna-gelap);
+}
+
+.tombol-lanjut {
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: var(--warna-utama);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.nav-bawah {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0 14px;
+    border-radius: 24px 24px 0 0;
+    background: var(--warna-nav);
+}
+
+.nav-bawah a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: var(--warna-teks);
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.nav-bawah svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.nav-bawah a.aktif {
+    color: var(--warna-utama);
+    font-weight: 700;
+}
+
+/* Desktop: nav bawah & bar keranjang diganti navbar atas */
+@media (min-width: 768px) {
+    .logo {
+        display: block;
+    }
+
+    .header-isi {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+
+    .nav-atas {
+        display: flex;
+        gap: 24px;
+        margin-left: 12px;
+        font-weight: 500;
+    }
+
+    .nav-atas a {
+        color: var(--warna-krem);
+        opacity: 0.8;
+    }
+
+    .nav-atas a.aktif,
+    .nav-atas a:hover {
+        opacity: 1;
+        font-weight: 700;
+    }
+
+    .pencarian {
+        order: 0;
+        flex: 1;
+        max-width: 320px;
+        margin-left: auto;
+    }
+
+    .nav-bawah {
+        display: none;
+    }
+
+    .bar-keranjang {
+        right: 24px;
+        bottom: 24px;
+        left: auto;
+        width: 380px;
+    }
+
+    main {
+        padding-bottom: 110px;
+    }
+}
