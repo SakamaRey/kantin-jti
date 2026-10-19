@@ -1,0 +1,5 @@
+# File lokal, jangan ikut ke GitHub
+.env
+.DS_Store
+Thumbs.db
+.vscode/
