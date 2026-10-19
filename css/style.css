@@ -1,0 +1,62 @@
+/* ==========================================================
+   Kantin JTI - style.css
+   Urutan isi file:
+   1. Variabel (warna, font)   2. Reset & dasar
+   ========================================================== */
+
+/* ---------- 1. Variabel ---------- */
+/* Ubah warna di sini, seluruh halaman ikut berubah. */
+:root {
+    --warna-latar: #755250;
+    --warna-utama: #b14a21;
+    --warna-utama-terang: #c95d2f;
+    --warna-krem: #f0e5df;
+    --warna-taupe: #ccb9b3;
+    --warna-nav: #e1d2cb;
+    --warna-teks: #6e4c42;
+    --warna-gelap: #3f2a27;
+
+    --font-judul: "Almendra", Georgia, serif;
+    --font-isi: "Poppins", system-ui, sans-serif;
+
+    --lebar-maks: 1100px;
+}
+
+/* ---------- 2. Reset & dasar ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--warna-latar);
+    color: var(--warna-teks);
+    font-family: var(--font-isi);
+    line-height: 1.5;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    background: none;
+}
