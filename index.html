@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Menu | Kantin JTI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almendra:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Bagian atas: logo, menu navigasi (desktop), pencarian, tombol login -->
+    <header class="header">
+        <div class="wadah header-isi">
+            <a href="index.html" class="logo">Kantin JTI</a>
+
+            <nav class="nav-atas" aria-label="Navigasi utama">
+                <a href="index.html" class="aktif">Home</a>
+                <a href="#">Transaksi</a>
+                <a href="#">Profile</a>
+            </nav>
+
+            <label class="pencarian">
+                <span aria-hidden="true">&#128269;</span>
+                <input type="search" id="cari" placeholder="Cari makanan" aria-label="Cari makanan">
+            </label>
+
+            <a href="#" class="tombol-pil">Login</a>
+        </div>
+    </header>
+
+    <main class="wadah">
+
+        <!-- Tab kategori (saat ini hanya "Menu") -->
+        <div class="tab-kategori">
+            <span class="tab aktif">Menu</span>
+        </div>
+
+        <!-- Kartu menu akan ditambahkan di commit berikutnya -->
+        <section class="grid-menu" id="daftar-menu"></section>
+
+    </main>
+
+</body>
+</html>

@@ -60,3 +60,91 @@ button {
     border: 0;
     background: none;
 }
+
+/* ==========================================================
+   3. Tata letak umum & header
+   ========================================================== */
+.wadah {
+    width: 100%;
+    max-width: var(--lebar-maks);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header {
+    padding: 20px 0 12px;
+}
+
+/* Mobile: logo disembunyikan, hanya pencarian + tombol login */
+.header-isi {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+}
+
+.logo {
+    display: none;
+    font-family: var(--font-judul);
+    font-size: 28px;
+    color: var(--warna-krem);
+}
+
+.nav-atas {
+    display: none; /* tampil di desktop (commit 5) */
+}
+
+.pencarian {
+    order: 3; /* di mobile pindah ke bawah tombol login */
+    flex: 1 1 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: var(--warna-krem);
+    font-size: 12px;
+}
+
+.pencarian input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+}
+
+.pencarian input::placeholder {
+    color: var(--warna-teks);
+}
+
+.tombol-pil {
+    padding: 6px 18px;
+    border-radius: 999px;
+    background: var(--warna-utama);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* ---------- Tab kategori ---------- */
+.tab-kategori {
+    display: flex;
+    margin: 8px 0 20px;
+    padding: 6px;
+    border-radius: 999px;
+    background: var(--warna-krem);
+}
+
+.tab {
+    padding: 8px 24px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tab.aktif {
+    background: var(--warna-utama);
+    color: #fff;
+}
