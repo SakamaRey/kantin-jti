@@ -334,3 +334,18 @@ main {
         padding-bottom: 110px;
     }
 }
+
+/* ==========================================================
+   6. Pencarian
+   ========================================================== */
+
+/* Pastikan atribut hidden selalu menyembunyikan elemen */
+[hidden] {
+    display: none !important;
+}
+
+.pesan-kosong {
+    padding: 40px 0;
+    color: var(--warna-krem);
+    text-align: center;
+}
