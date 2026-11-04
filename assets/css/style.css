@@ -15,11 +15,14 @@
     --warna-nav: #e1d2cb;
     --warna-teks: #6e4c42;
     --warna-gelap: #3f2a27;
+    --warna-keranjang: #bfaaa5; 
+    --warna-bar: #b39b97;
 
     --font-judul: "Almendra", Georgia, serif;
     --font-isi: "Poppins", system-ui, sans-serif;
 
     --lebar-maks: 1100px;
+    --tinggi-nav: 70px;
 }
 
 /* ---------- 2. Reset & dasar ---------- */
@@ -82,17 +85,6 @@ button {
     align-items: center;
     justify-content: flex-end;
     gap: 14px;
-}
-
-.logo {
-    display: none;
-    font-family: var(--font-judul);
-    font-size: 28px;
-    color: var(--warna-krem);
-}
-
-.nav-atas {
-    display: none; /* tampil di desktop (commit 5) */
 }
 
 .pencarian {
@@ -215,45 +207,85 @@ button {
 
 /* Ruang kosong di bawah agar konten tidak tertutup bar */
 main {
-    padding-bottom: 150px;
+    padding-bottom: 190px;
 }
 
 .bar-keranjang {
     position: fixed;
-    right: 16px;
-    bottom: 88px;
-    left: 16px;
+    right: 12px;
+    bottom: calc(var(--tinggi-nav) + 12px); 
+    left: 12px;
+    z-index: 20;
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 10px 12px 10px 20px;
+    max-width: 600px;
+    margin: 0 auto;         
+    padding: 12px 20px;
     border-radius: 999px;
-    background: var(--warna-krem);
-    font-size: 14px;
-}
-
-.bar-keranjang strong {
-    flex: 1;
-    color: var(--warna-gelap);
-}
-
-.tombol-lanjut {
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: var(--warna-utama);
-    color: #fff;
+    background: var(--warna-bar);
     font-size: 12px;
+}
+
+.info-bar {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    line-height: 1.3;
+}
+ 
+.info-bar span {
+    color: var(--warna-gelap);
     font-weight: 600;
 }
-
+ 
+.info-bar strong {
+    color: var(--warna-utama);
+    font-size: 13px;
+    font-weight: 600;
+}
+ 
+.tombol-panah {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--warna-utama-terang);
+    color: #fff;
+}
+ 
+.tombol-panah svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+ 
+.tombol-lanjut {
+    padding: 8px 22px;
+    border-radius: 999px;
+    background: var(--warna-utama-terang);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+ 
 .nav-bawah {
     position: fixed;
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 30;
     display: flex;
+    align-items: center;
     justify-content: space-around;
-    padding: 10px 0 14px;
+    min-height: var(--tinggi-nav);
+    padding: 8px 0;
     border-radius: 24px 24px 0 0;
     background: var(--warna-nav);
 }
@@ -281,58 +313,6 @@ main {
 .nav-bawah a.aktif {
     color: var(--warna-utama);
     font-weight: 700;
-}
-
-/* Desktop: nav bawah & bar keranjang diganti navbar atas */
-@media (min-width: 768px) {
-    .logo {
-        display: block;
-    }
-
-    .header-isi {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-    }
-
-    .nav-atas {
-        display: flex;
-        gap: 24px;
-        margin-left: 12px;
-        font-weight: 500;
-    }
-
-    .nav-atas a {
-        color: var(--warna-krem);
-        opacity: 0.8;
-    }
-
-    .nav-atas a.aktif,
-    .nav-atas a:hover {
-        opacity: 1;
-        font-weight: 700;
-    }
-
-    .pencarian {
-        order: 0;
-        flex: 1;
-        max-width: 320px;
-        margin-left: auto;
-    }
-
-    .nav-bawah {
-        display: none;
-    }
-
-    .bar-keranjang {
-        right: 24px;
-        bottom: 24px;
-        left: auto;
-        width: 380px;
-    }
-
-    main {
-        padding-bottom: 110px;
-    }
 }
 
 /* ==========================================================
@@ -442,3 +422,401 @@ main.tengah {
     font-size: 12px;
     font-weight: 500;
 }
+/* ==========================================================
+   8. Halaman riwayat transaksi
+   ========================================================== */
+.daftar-transaksi {
+    display: grid;
+    gap: 12px;
+    margin-top: 8px;
+}
+ 
+.kartu-transaksi {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 6px;
+    background: var(--warna-krem);
+}
+ 
+.kartu-transaksi h3 {
+    color: var(--warna-gelap);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+ 
+.kartu-transaksi .tanggal {
+    color: var(--warna-teks);
+    font-size: 11px;
+}
+ 
+.kartu-transaksi .total {
+    flex-shrink: 0;
+    color: var(--warna-gelap);
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+ 
+/* Layar lebar: daftar dibuat di tengah agar tidak terlalu melebar */
+@media (min-width: 768px) {
+    .daftar-transaksi {
+        max-width: 720px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+ 
+/* ==========================================================
+   9. Tombol + di kartu menu
+   ========================================================== */
+.kartu-bawah {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+ 
+.tombol-tambah {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--warna-utama);
+    color: #fff;
+    transition: transform 0.1s;
+}
+ 
+.tombol-tambah:active {
+    transform: scale(0.9);
+}
+ 
+.tombol-tambah svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+ 
+/* ==========================================================
+   10. Lembar keranjang
+   Mobile: naik dari bawah. Layar lebar: panel di kanan, lebar 420px.
+   ========================================================== */
+body.kunci-gulir {
+    overflow: hidden;
+}
+ 
+.lapisan-keranjang {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(63, 42, 39, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s, visibility 0s 0.25s;
+}
+ 
+.lapisan-keranjang.terbuka {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s;
+}
+ 
+.keranjang {
+    position: fixed;
+    right: 12px;           
+    bottom: 0;
+    left: 12px;           
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    min-height: 60vh;
+    max-height: 85vh;
+    max-width: 600px;      
+    margin: 0 auto;        
+    padding: 20px 20px 24px;
+    border-radius: 36px 36px 0 0;
+    background: var(--warna-keranjang);
+    transform: translateY(100%);
+    visibility: hidden;
+    transition: transform 0.3s ease, visibility 0s 0.3s;
+}
+ 
+.keranjang.terbuka {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.3s ease;
+}
+ 
+.tombol-tutup {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--warna-krem);
+    color: var(--warna-teks);
+}
+ 
+.tombol-tutup svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+ 
+/* ---------- Daftar menu di keranjang ---------- */
+.daftar-keranjang {
+    flex: 1;
+    margin: 8px 0 12px;
+    overflow-y: auto;
+    list-style: none;
+}
+ 
+.item-keranjang {
+    border-bottom: 1px solid rgba(110, 76, 66, 0.7);
+}
+ 
+.item-keranjang:last-child {
+    border-bottom: 0;
+}
+ 
+/* .baris memotong isi yang bergeser ke kiri */
+.baris {
+    position: relative;
+    overflow: hidden;
+}
+ 
+.isi-item {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0; 
+    background: var(--warna-keranjang);
+    cursor: grab;
+    touch-action: pan-y; 
+    transition: transform 0.2s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+ 
+/* Geser ke kiri: isi bergeser, tombol di baliknya terlihat */
+.item-keranjang.digeser .isi-item {
+    transform: translateX(-46px);
+}
+ 
+.foto-item {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    padding: 5px;
+    border-radius: 16px;
+    background: var(--warna-krem);
+}
+ 
+.foto-item img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    pointer-events: none;
+}
+ 
+.info-item {
+    flex: 1;
+    min-width: 0;
+}
+ 
+.info-item h4 {
+    color: var(--warna-teks);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+ 
+.rincian {
+    color: var(--warna-utama);
+    font-size: 10px;
+    font-weight: 600;
+}
+ 
+.kanan-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+ 
+.stepper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 4px;
+    border-radius: 999px;
+    background: var(--warna-krem);
+    color: var(--warna-gelap);
+    font-size: 12px;
+    font-weight: 600;
+}
+ 
+.tombol-bulat {
+    display: grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--warna-teks);
+    border-radius: 50%;
+    color: var(--warna-teks);
+    font-size: 15px;
+    line-height: 1;
+}
+ 
+.tombol-bulat.isi {
+    border-color: var(--warna-gelap);
+    background: var(--warna-gelap);
+    color: #fff;
+}
+ 
+.tombol-bulat:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+ 
+.total-item {
+    color: var(--warna-utama);
+    font-size: 11px;
+    font-weight: 600;
+}
+ 
+/* ---------- Tombol catatan & hapus ---------- */
+.aksi-geser {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: 40px;
+    overflow: hidden;
+    border: 1px solid var(--warna-teks);
+    border-radius: 8px;
+    background: var(--warna-krem);
+    transform: translateY(-50%);
+}
+ 
+.tombol-aksi {
+    display: grid;
+    place-items: center;
+    height: 32px;
+    color: var(--warna-teks);
+}
+ 
+.tombol-aksi + .tombol-aksi {
+    border-top: 1px solid var(--warna-teks);
+}
+ 
+.tombol-aksi svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+ 
+/* ---------- Catatan ---------- */
+.kotak-catatan {
+    padding-bottom: 12px;
+}
+ 
+.kotak-catatan textarea {
+    display: block;
+    width: 100%;
+    min-height: 56px;
+    padding: 12px 16px;
+    border: 0;
+    border-radius: 12px;
+    outline: 0;
+    resize: none;
+    background: var(--warna-krem);
+    color: var(--warna-gelap);
+    font-family: inherit; 
+    font-size: 13px;
+    font-weight: 500;
+}
+ 
+.kotak-catatan textarea::placeholder {
+    color: var(--warna-teks);
+}
+ 
+.kotak-catatan textarea:focus {
+    box-shadow: inset 0 0 0 2px var(--warna-teks); 
+}
+ 
+/* ---------- Jam ambil, subtotal, tombol ---------- */
+.baris-jam {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 -20px;
+    padding: 8px 20px;
+    background: var(--warna-krem);
+    color: var(--warna-gelap);
+    font-size: 12px;
+    font-weight: 600;
+}
+ 
+.baris-jam select {
+    padding: 3px 8px;
+    border: 1px solid var(--warna-utama);
+    border-radius: 4px;
+    background: var(--warna-krem);
+    color: var(--warna-utama);
+    font-size: 12px;
+}
+ 
+.baris-subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    padding: 10px 4px 0;
+    border-top: 1px solid var(--warna-teks);
+    color: var(--warna-gelap);
+    font-size: 13px;
+    font-weight: 600;
+}
+ 
+.keranjang .tombol {
+    margin-top: 14px;
+}
+ 
+.keranjang .tombol:disabled {
+    cursor: not-allowed;
+}
+ 
+/* Layar lebar: panel di sisi kanan, lebar 420px, setinggi layar */
+/* @media (min-width: 768px) {
+    .keranjang {
+        top: 0;
+        left: auto;
+        width: 420px;
+        min-height: 0;
+        max-height: none;
+        padding-top: 28px;
+        border-radius: 32px 0 0 32px;
+        transform: translateX(100%);
+    }
+} */

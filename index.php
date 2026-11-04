@@ -7,7 +7,7 @@ $daftarMenu = $pdo->query('SELECT * FROM menu WHERE tersedia = TRUE ORDER BY id'
 
 $judul      = 'Menu';
 $tampilCari = true;
-$skrip      = ['cari.js'];
+$skrip      = ['cari.js', 'keranjang.js'];
 
 require __DIR__ . '/includes/header.php';
 ?>
@@ -18,11 +18,21 @@ require __DIR__ . '/includes/header.php';
 
         <section class="grid-menu" id="daftar-menu">
             <?php foreach ($daftarMenu as $menu): ?>
-                <article class="kartu-menu">
+                <article class="kartu-menu"
+                         data-id="<?= (int) $menu['id'] ?>"
+                         data-nama="<?= e($menu['nama']) ?>"
+                         data-harga="<?= (int) $menu['harga'] ?>"
+                         data-gambar="<?= e(aset('images/' . $menu['gambar'])) ?>">
                     <img src="<?= e(aset('images/' . $menu['gambar'])) ?>" alt="<?= e($menu['nama']) ?>" width="96" height="96">
                     <h3><?= e($menu['nama']) ?></h3>
                     <p class="deskripsi"><?= e($menu['deskripsi']) ?></p>
-                    <p class="harga"><?= e(rupiah($menu['harga'])) ?></p>
+                    <?php ?>
+                    <div class="kartu-bawah">
+                        <button type="button" class="tombol-tambah" aria-label="Tambah <?= e($menu['nama']) ?> ke keranjang">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                        </button>
+                        <p class="harga"><?= e(rupiah($menu['harga'])) ?></p>
+                    </div>
                 </article>
             <?php endforeach; ?>
         </section>
