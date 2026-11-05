@@ -43,23 +43,23 @@ require __DIR__ . '/../includes/header.php';
                             <img src="<?= e(aset('images/' . $item['gambar'])) ?>" alt="" width="64" height="64">
 
                             <div class="item-info">
-                                <h3><?= e($item['nama']) ?></h3>
+                                <h3><?= e($item['nama_menu']) ?></h3>
                                 <p class="item-harga">
                                     <?= e(rupiah($item['harga'])) ?> &times; <?= (int) $item['jumlah'] ?>
                                     = <strong><?= e(rupiah($item['subtotal'])) ?></strong>
                                 </p>
-                                <input type="text" name="catatan[<?= (int) $item['id'] ?>]"
+                                <input type="text" name="catatan[<?= (int) $item['id_menu'] ?>]"
                                        value="<?= e($item['catatan']) ?>" maxlength="200"
-                                       placeholder="Catatan, mis. tanpa timun" aria-label="Catatan untuk <?= e($item['nama']) ?>">
+                                       placeholder="Catatan, mis. tanpa timun" aria-label="Catatan untuk <?= e($item['nama_menu']) ?>">
                             </div>
 
                             <div class="item-aksi">
                                 <div class="jumlah">
-                                    <button type="submit" name="aksi" value="kurang:<?= (int) $item['id'] ?>" aria-label="Kurangi">&minus;</button>
+                                    <button type="submit" name="aksi" value="kurang:<?= (int) $item['id_menu'] ?>" aria-label="Kurangi">&minus;</button>
                                     <span><?= (int) $item['jumlah'] ?></span>
-                                    <button type="submit" name="aksi" value="tambah:<?= (int) $item['id'] ?>" aria-label="Tambah">+</button>
+                                    <button type="submit" name="aksi" value="tambah:<?= (int) $item['id_menu'] ?>" aria-label="Tambah">+</button>
                                 </div>
-                                <button type="submit" name="aksi" value="hapus:<?= (int) $item['id'] ?>" class="tombol-hapus">Hapus</button>
+                                <button type="submit" name="aksi" value="hapus:<?= (int) $item['id_menu'] ?>" class="tombol-hapus">Hapus</button>
                             </div>
                         </li>
                     <?php endforeach; ?>

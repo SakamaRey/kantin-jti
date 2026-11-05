@@ -14,7 +14,7 @@ $id = (int) ($_POST['id'] ?? 0);
 // Hanya bisa dibatalkan jika milik sendiri DAN masih "menunggu".
 // (Jika admin sempat menerima lebih dulu, tidak ada baris yang berubah.)
 $stmt = $pdo->prepare(
-    "UPDATE pesanan SET status = 'dibatalkan' WHERE id = ? AND pengguna_id = ? AND status = 'menunggu'"
+    "UPDATE pesanan SET status = 'dibatalkan' WHERE id_pesanan = ? AND users_id = ? AND status = 'menunggu'"
 );
 $stmt->execute([$id, pengguna_saat_ini()['id']]);
 

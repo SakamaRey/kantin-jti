@@ -32,7 +32,7 @@ $menuId = (int) $menuId;
 switch ($perintah) {
     case 'tambah':
         // Hanya menu yang masih tersedia yang boleh masuk keranjang
-        $stmt = $pdo->prepare('SELECT 1 FROM menu WHERE id = ? AND tersedia = TRUE');
+        $stmt = $pdo->prepare('SELECT 1 FROM menu WHERE id_menu = ? AND tersedia = TRUE');
         $stmt->execute([$menuId]);
         if ($stmt->fetchColumn()) {
             keranjang_ubah($menuId, +1);
@@ -50,13 +50,13 @@ switch ($perintah) {
         break;
 
     case 'pesan':
-        try {
-            $pesanan = buat_pesanan($pdo, pengguna_saat_ini()['id']);
-            alihkan('pelanggan/pesanan-status.php?id=' . $pesanan['id']);
-        } catch (RuntimeException $e) {
-            $_SESSION['pesan_error'] = $e->getMessage();
-        }
-        break;
+    try {
+        $pesanan = buat_pesanan($pdo, pengguna_saat_ini()['users_id']);
+        alihkan('pelanggan/pesanan-status.php?id=' . $pesanan['id_pesanan']);
+    } catch (RuntimeException $e) {
+        $_SESSION['pesan_error'] = $e->getMessage();
+    }
+    break;
 }
 
 alihkan($kembali);

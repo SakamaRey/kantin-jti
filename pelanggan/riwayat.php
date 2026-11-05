@@ -6,14 +6,14 @@ wajib_login();
 
 // Riwayat = menu yang sudah dibeli pada pesanan yang diterima admin, terbaru di atas.
 $stmt = $pdo->prepare(
-    "SELECT m.nama, p.dibuat_pada, i.jumlah * i.harga AS nominal
+    "SELECT m.nama_menu AS nama, p.create_pesanan AS dibuat_pada, i.jumlah * i.harga AS nominal
      FROM item_pesanan i
-     JOIN pesanan p ON p.id = i.pesanan_id
-     JOIN menu m    ON m.id = i.menu_id
-     WHERE p.pengguna_id = ? AND p.status = 'diterima'
-     ORDER BY p.dibuat_pada DESC, i.id"
+     JOIN pesanan p ON p.id_pesanan = i.id_pesanan
+     JOIN menu m    ON m.id_menu = i.id_menu
+     WHERE p.users_id = ? AND p.status = 'diterima'
+     ORDER BY p.create_pesanan DESC, i.id_item"
 );
-$stmt->execute([pengguna_saat_ini()['id']]);
+$stmt->execute([pengguna_saat_ini()['users_id']]);
 $daftarRiwayat = $stmt->fetchAll();
 
 $judul      = 'Riwayat Transaksi';

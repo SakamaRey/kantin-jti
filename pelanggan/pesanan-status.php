@@ -4,9 +4,12 @@ require __DIR__ . '/../includes/fungsi.php';
 
 wajib_login();
 
-// Ambil pesanan, tapi hanya jika milik pengguna yang sedang login
-$stmt = $pdo->prepare('SELECT * FROM pesanan WHERE id = ? AND pengguna_id = ?');
-$stmt->execute([(int) ($_GET['id'] ?? 0), pengguna_saat_ini()['id']]);
+// Ambil ID pesanan dari URL secara aman (?id= ATAU ?id_pesanan=)
+$idPesanan = (int) ($_GET['id'] ?? $_GET['id_pesanan'] ?? 0);
+
+// PERBAIKAN: Mengubah id & pengguna_id menjadi id_pesanan & users_id
+$stmt = $pdo->prepare('SELECT * FROM pesanan WHERE id_pesanan = ? AND users_id = ?');
+$stmt->execute([$idPesanan, pengguna_saat_ini()['users_id']]);
 $pesanan = $stmt->fetch();
 
 // Pesanan tidak ada atau sudah dibatalkan: kembali ke katalog
@@ -14,7 +17,7 @@ if (!$pesanan || $pesanan['status'] === 'dibatalkan') {
     alihkan('index.php');
 }
 
-$status = $pesanan['status']; // menunggu | diterima | ditolak
+$status = $pesanan['status']; // menunggu | diterima | ditolak | dibatalkan | selesai
 
 $judul = 'Status Pesanan';
 $polos = true;
@@ -29,7 +32,7 @@ require __DIR__ . '/../includes/header.php';
 
         <div class="layar-status" id="status-pesanan"
              data-status="<?= e($status) ?>"
-             data-cek="<?= e(url('pelanggan/pesanan-cek.php?id=' . (int) $pesanan['id'])) ?>">
+             data-cek="<?= e(url('pelanggan/pesanan-cek.php?id=' . (int) $pesanan['id_pesanan'])) ?>">
 
             <?php if ($status === 'menunggu'): ?>
 
@@ -42,7 +45,7 @@ require __DIR__ . '/../includes/header.php';
 
                 <form method="post" action="<?= e(url('pelanggan/pesanan-batal.php')) ?>" class="tombol-status-bungkus">
                     <input type="hidden" name="csrf" value="<?= e(token_csrf()) ?>">
-                    <input type="hidden" name="id" value="<?= (int) $pesanan['id'] ?>">
+                    <input type="hidden" name="id" value="<?= (int) $pesanan['id_pesanan'] ?>">
                     <button type="submit" class="tombol-status">Batal</button>
                 </form>
 

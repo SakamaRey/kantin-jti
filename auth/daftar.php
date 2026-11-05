@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 2. Cek email / username sudah dipakai atau belum
     if (!$errors) {
-        $stmt = $pdo->prepare('SELECT 1 FROM pengguna WHERE email = ? OR username = ?');
+        $stmt = $pdo->prepare('SELECT 1 FROM users WHERE email = ? OR username = ?');
         $stmt->execute([$email, $username]);
         if ($stmt->fetchColumn()) {
             $errors[] = 'Email atau username sudah terdaftar.';
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 3. Simpan, lalu langsung login
     if (!$errors) {
         $stmt = $pdo->prepare(
-            'INSERT INTO pengguna (email, username, password) VALUES (?, ?, ?) RETURNING id, username, peran'
+            'INSERT INTO users (email, username, password) VALUES (?, ?, ?) RETURNING users_id, username, role'
         );
         $stmt->execute([$email, $username, password_hash($password, PASSWORD_DEFAULT)]);
 

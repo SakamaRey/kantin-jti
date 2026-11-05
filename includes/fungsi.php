@@ -84,7 +84,7 @@ function alihkan($path)
 // Data pengguna yang sedang login (id, username, peran), atau null.
 function pengguna_saat_ini()
 {
-    return $_SESSION['pengguna'] ?? null;
+    return $_SESSION['users'] ?? null;
 }
 
 // Pasang di halaman yang hanya boleh dibuka setelah login.
@@ -110,13 +110,13 @@ function csrf_valid()
 }
 
 // Simpan pengguna ke session (dipakai setelah login / daftar).
-function masukkan_session($pengguna)
+function masukkan_session($users)
 {
     session_regenerate_id(true); // ganti ID session agar tidak bisa dibajak
-    $_SESSION['pengguna'] = [
-        'id'       => (int) $pengguna['id'],
-        'username' => $pengguna['username'],
-        'peran'    => $pengguna['peran'],
+    $_SESSION['users'] = [
+        'users_id'       => (int) $users['users_id'],
+        'username' => $users['username'],
+        'role'    => $users['role'],
     ];
 }
 

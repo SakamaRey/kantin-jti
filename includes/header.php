@@ -7,7 +7,7 @@ $judul      = $judul      ?? 'Kantin JTI';
 $tampilCari = $tampilCari ?? false;
 $polos      = $polos      ?? false;
 $aktif      = $aktif      ?? 'home';
-$pengguna   = pengguna_saat_ini();
+$users   = pengguna_saat_ini();
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -41,8 +41,8 @@ $pengguna   = pengguna_saat_ini();
                 </label>
             <?php endif; ?>
 
-            <?php if ($pengguna): ?>
-                <span class="nama-pengguna"><?= e($pengguna['username']) ?></span>
+            <?php if ($users): ?>
+                <span class="nama-pengguna"><?= e($users['username']) ?></span>
                 <a href="<?= e(url('auth/logout.php')) ?>" class="tombol-pil">Logout</a>
             <?php else: ?>
                 <a href="<?= e(url('auth/login.php')) ?>" class="tombol-pil">Login</a>

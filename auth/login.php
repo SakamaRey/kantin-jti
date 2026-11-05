@@ -15,12 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     // Boleh login memakai username ATAU email
-    $stmt = $pdo->prepare('SELECT * FROM pengguna WHERE username = ? OR email = ?');
+    $stmt = $pdo->prepare('SELECT * FROM users WHERE username = ? OR email = ?');
     $stmt->execute([$username, $username]);
-    $pengguna = $stmt->fetch();
+    $users = $stmt->fetch();
 
-    if (csrf_valid() && $pengguna && password_verify($password, $pengguna['password'])) {
-        masukkan_session($pengguna);
+    if (csrf_valid() && $users && password_verify($password, $users['password'])) {
+        masukkan_session($users);
         alihkan('index.php');
     }
 

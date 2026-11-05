@@ -3,7 +3,7 @@ require __DIR__ . '/config/koneksi.php';
 require __DIR__ . '/includes/fungsi.php';
 
 // Ambil semua menu yang tersedia dari database
-$daftarMenu = $pdo->query('SELECT * FROM menu WHERE tersedia = TRUE ORDER BY id')->fetchAll();
+$daftarMenu = $pdo->query('SELECT * FROM menu WHERE tersedia = TRUE ORDER BY id_menu')->fetchAll();
 
 $judul      = 'Menu';
 $tampilCari = true;
@@ -24,8 +24,8 @@ require __DIR__ . '/includes/header.php';
         <section class="grid-menu" id="daftar-menu">
             <?php foreach ($daftarMenu as $menu): ?>
                 <article class="kartu-menu" data-cari>
-                    <img src="<?= e(aset('images/' . $menu['gambar'])) ?>" alt="<?= e($menu['nama']) ?>" width="96" height="96">
-                    <h3><?= e($menu['nama']) ?></h3>
+                    <img src="<?= e(aset('images/' . $menu['gambar'])) ?>" alt="<?= e($menu['nama_menu']) ?>" width="96" height="96">
+                    <h3><?= e($menu['nama_menu']) ?></h3>
                     <p class="deskripsi"><?= e($menu['deskripsi']) ?></p>
                     <div class="baris-harga">
                         <p class="harga"><?= e(rupiah($menu['harga'])) ?></p>
@@ -33,8 +33,8 @@ require __DIR__ . '/includes/header.php';
                         <!-- Tombol tambah: dikirim ke pelanggan/keranjang-proses.php -->
                         <form method="post" action="<?= e(url('pelanggan/keranjang-proses.php')) ?>">
                             <input type="hidden" name="csrf" value="<?= e(token_csrf()) ?>">
-                            <input type="hidden" name="aksi" value="tambah:<?= (int) $menu['id'] ?>">
-                            <button type="submit" class="tombol-tambah" aria-label="Tambah <?= e($menu['nama']) ?> ke keranjang">+</button>
+                            <input type="hidden" name="aksi" value="tambah:<?= (int) $menu['id_menu'] ?>">
+                            <button type="submit" class="tombol-tambah" aria-label="Tambah <?= e($menu['nama_menu']) ?> ke keranjang">+</button>
                         </form>
                     </div>
                 </article>

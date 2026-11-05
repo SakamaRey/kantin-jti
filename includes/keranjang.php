@@ -47,20 +47,20 @@ function keranjang_detail(PDO $pdo)
 
     $id    = array_keys($isi);
     $tanda = implode(',', array_fill(0, count($id), '?'));
-    $stmt  = $pdo->prepare("SELECT * FROM menu WHERE tersedia = TRUE AND id IN ($tanda) ORDER BY id");
+    $stmt  = $pdo->prepare("SELECT * FROM menu WHERE tersedia = TRUE AND id_menu IN ($tanda) ORDER BY id_menu");
     $stmt->execute($id);
 
     foreach ($stmt->fetchAll() as $menu) {
-        $jumlah = $isi[$menu['id']]['jumlah'];
+        $jumlah = $isi[$menu['id_menu']]['jumlah'];
 
         $hasil['item'][] = [
-            'id'       => (int) $menu['id'],
-            'nama'     => $menu['nama'],
-            'gambar'   => $menu['gambar'],
-            'harga'    => (int) $menu['harga'],
-            'jumlah'   => $jumlah,
-            'catatan'  => $isi[$menu['id']]['catatan'] ?? '',
-            'subtotal' => $menu['harga'] * $jumlah,
+            'id_menu'   => (int) $menu['id_menu'],
+            'nama_menu' => $menu['nama_menu'],
+            'gambar'    => $menu['gambar'],
+            'harga'     => (int) $menu['harga'],
+            'jumlah'    => $jumlah,
+            'catatan'   => $isi[$menu['id_menu']]['catatan'] ?? '',
+            'subtotal'  => $menu['harga'] * $jumlah,
         ];
         $hasil['jumlah_item'] += $jumlah;
         $hasil['total']       += $menu['harga'] * $jumlah;
@@ -85,8 +85,8 @@ function buat_pesanan(PDO $pdo, $penggunaId)
 
     try {
         $stmt = $pdo->prepare(
-            'INSERT INTO pesanan (kode, pengguna_id, jam_ambil, total) VALUES (?, ?, ?, ?)
-             ON CONFLICT (kode) DO NOTHING RETURNING id'
+            'INSERT INTO pesanan (kode, users_id, jam_ambil, total) VALUES (?, ?, ?, ?)
+             ON CONFLICT (kode) DO NOTHING RETURNING id_pesanan'
         );
 
         for ($percobaan = 0;; $percobaan++) {
@@ -103,11 +103,12 @@ function buat_pesanan(PDO $pdo, $penggunaId)
         }
 
         $baris = $pdo->prepare(
-            'INSERT INTO item_pesanan (pesanan_id, menu_id, jumlah, harga, catatan) VALUES (?, ?, ?, ?, ?)'
+            'INSERT INTO item_pesanan (id_pesanan, id_menu, jumlah, harga, catatan) VALUES (?, ?, ?, ?, ?)'
         );
         foreach ($keranjang['item'] as $item) {
             $catatan = trim($item['catatan']);
-            $baris->execute([$pesananId, $item['id'], $item['jumlah'], $item['harga'], $catatan === '' ? null : $catatan]);
+            // Diperbaiki ke $item['id_menu']
+            $baris->execute([$pesananId, $item['id_menu'], $item['jumlah'], $item['harga'], $catatan === '' ? null : $catatan]);
         }
 
         $pdo->commit();
@@ -118,5 +119,9 @@ function buat_pesanan(PDO $pdo, $penggunaId)
 
     keranjang_kosongkan();
 
-    return ['id' => (int) $pesananId, 'kode' => $kode];
+    return [
+        'id_pesanan' => (int) $pesananId,
+        'id'         => (int) $pesananId, 
+        'kode'       => $kode
+    ];
 }
