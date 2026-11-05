@@ -56,10 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $judul = 'Sign Up';
 $polos = true;
+$skrip = ['lihat-password.js'];
 require __DIR__ . '/../includes/header.php';
 ?>
 
-        <h1 class="judul-auth">Buat Akun<br>Kantin JTI</h1>
+        <h1 class="judul-auth">Selamat Datang di<br>Kantin JTI</h1>
 
         <?php if ($errors): ?>
             <div class="pesan-error" role="alert">
@@ -75,27 +76,20 @@ require __DIR__ . '/../includes/header.php';
             <input type="hidden" name="csrf" value="<?= e(token_csrf()) ?>">
 
             <div class="field">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?= e($email) ?>" placeholder="contoh: carmen@gmail.com" required>
+                <label for="email">Email <span class="wajib">*</span></label>
+                <input type="email" id="email" name="email" value="<?= e($email) ?>" placeholder="contoh: Carmen@gmail.com" required>
             </div>
 
             <div class="field">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" value="<?= e($username) ?>" placeholder="contoh: Carmenita" required>
+                <label for="username">Username <span class="wajib">*</span></label>
+                <input type="text" id="username" name="username" value="<?= e($username) ?>" placeholder="contoh: Nyoman Ayu Carmenita" required>
             </div>
 
-            <div class="field">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="minimal 6 karakter" required>
-            </div>
-
-            <div class="field">
-                <label for="ulangi_password">Ulangi Password</label>
-                <input type="password" id="ulangi_password" name="ulangi_password" placeholder="ketik ulang password" required>
-            </div>
+            <?php input_password('password', 'New Password', 'contoh: Carmen****', true); ?>
+            <?php input_password('ulangi_password', 'Confirm Password', 'contoh: Carmen****', true); ?>
 
             <div class="aksi-auth">
-                <button type="submit" class="tombol">Sign Up</button>
+                <button type="submit" class="tombol">Continue</button>
                 <a href="<?= e(url('auth/login.php')) ?>" class="tombol tombol-sekunder">Sudah punya akun? Login</a>
             </div>
         </form>

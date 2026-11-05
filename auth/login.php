@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $judul = 'Login';
 $polos = true;
+$skrip = ['lihat-password.js'];
 require __DIR__ . '/../includes/header.php';
 ?>
 
@@ -42,7 +43,7 @@ require __DIR__ . '/../includes/header.php';
             <input type="hidden" name="csrf" value="<?= e(token_csrf()) ?>">
 
             <div class="field">
-                <label for="username">Username / Email</label>
+                <label for="username">Username</label>
                 <input type="text" id="username" name="username" value="<?= e($username) ?>" placeholder="contoh: Carmenita" required>
             </div>
 

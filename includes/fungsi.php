@@ -18,6 +18,31 @@ function rupiah($angka)
     return 'Rp ' . number_format((int) $angka, 0, ',', '.');
 }
 
+// 70000 -> "Rp. 70.000,-" (format resmi untuk subtotal)
+function rupiah_formal($angka)
+{
+    return 'Rp. ' . number_format((int) $angka, 0, ',', '.') . ',-';
+}
+
+// Kolom password dengan tombol mata (tampil/sembunyi). JS-nya: assets/js/lihat-password.js
+function input_password($id, $label, $placeholder, $wajib = false)
+{
+    ?>
+    <div class="field">
+        <label for="<?= e($id) ?>"><?= e($label) ?><?php if ($wajib): ?> <span class="wajib">*</span><?php endif; ?></label>
+        <div class="kolom-password">
+            <input type="password" id="<?= e($id) ?>" name="<?= e($id) ?>" placeholder="<?= e($placeholder) ?>" required>
+            <button type="button" class="lihat-password" data-target="<?= e($id) ?>" aria-label="Tampilkan password">
+                <!-- mata tertutup (password tersembunyi) -->
+                <svg class="mata-tutup" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10c4 5 14 5 18 0"/><path d="M6 14l-2 3M12 15.5V19M18 14l2 3"/></svg>
+                <!-- mata terbuka (password terlihat) -->
+                <svg class="mata-buka" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+        </div>
+    </div>
+    <?php
+}
+
 // ---------- Alamat (URL) ----------
 // Halaman ada di folder berbeda (index.php di depan, login.php di auth/),
 // jadi alamat file CSS, gambar, dan link harus dihitung dari folder proyek.
@@ -93,4 +118,19 @@ function masukkan_session($pengguna)
         'username' => $pengguna['username'],
         'peran'    => $pengguna['peran'],
     ];
+}
+
+// Fungsi keranjang belanja
+require_once __DIR__ . '/keranjang.php';
+
+// 10000 -> "Rp. 10.000" (dipakai di daftar riwayat)
+function rupiah_titik($angka)
+{
+    return 'Rp. ' . number_format((int) $angka, 0, ',', '.');
+}
+
+// "2026-08-12 11:00:00" -> "12 Aug 2026"
+function tanggal_pendek($waktu)
+{
+    return date('d M Y', strtotime($waktu));
 }

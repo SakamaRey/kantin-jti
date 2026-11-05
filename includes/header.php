@@ -6,6 +6,7 @@
 $judul      = $judul      ?? 'Kantin JTI';
 $tampilCari = $tampilCari ?? false;
 $polos      = $polos      ?? false;
+$aktif      = $aktif      ?? 'home';
 $pengguna   = pengguna_saat_ini();
 ?>
 <!DOCTYPE html>
@@ -28,9 +29,9 @@ $pengguna   = pengguna_saat_ini();
             <a href="<?= e(url('index.php')) ?>" class="logo">Kantin JTI</a>
 
             <nav class="nav-atas" aria-label="Navigasi utama">
-                <a href="<?= e(url('index.php')) ?>" class="aktif">Home</a>
-                <a href="#">Transaksi</a>
-                <a href="#">Profile</a>
+                <a href="<?= e(url('index.php')) ?>" class="<?= $aktif === 'home' ? 'aktif' : '' ?>">Home</a>
+                <a href="<?= e(url('pelanggan/riwayat.php')) ?>" class="<?= $aktif === 'transaksi' ? 'aktif' : '' ?>">Transaksi</a>
+                <a href="#" class="<?= $aktif === 'profil' ? 'aktif' : '' ?>">Profile</a>
             </nav>
 
             <?php if ($tampilCari): ?>

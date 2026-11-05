@@ -263,9 +263,10 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    color: var(--warna-teks);
+    color: var(--warna-gelap);
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .nav-bawah svg {
@@ -279,8 +280,7 @@ main {
 }
 
 .nav-bawah a.aktif {
-    color: var(--warna-utama);
-    font-weight: 700;
+    color: var(--warna-utama-terang);
 }
 
 /* Desktop: nav bawah & bar keranjang diganti navbar atas */
@@ -441,4 +441,428 @@ main.tengah {
     color: var(--warna-krem);
     font-size: 12px;
     font-weight: 500;
+}
+
+/* ==========================================================
+   8. Pesan makanan: tombol tambah, keranjang, struk
+   ========================================================== */
+
+/* Harga + tombol bulat "+" di kartu menu */
+.baris-harga {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.baris-harga .harga {
+    white-space: nowrap;
+}
+
+.tombol-tambah {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--warna-utama);
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+}
+
+/* Halaman keranjang */
+.judul-halaman {
+    margin: 8px 0 20px;
+    color: var(--warna-krem);
+    font-family: var(--font-judul);
+    font-size: 28px;
+    font-weight: 400;
+}
+
+.keranjang-kosong {
+    display: grid;
+    gap: 16px;
+    padding: 40px 20px;
+    border-radius: 24px;
+    background: var(--warna-krem);
+    text-align: center;
+}
+
+.form-keranjang {
+    max-width: 640px;
+}
+
+.daftar-keranjang {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 20px;
+    list-style: none;
+}
+
+.item-keranjang {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 20px;
+    background: var(--warna-krem);
+}
+
+.item-keranjang img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.item-info h3 {
+    font-size: 16px;
+}
+
+.item-harga {
+    margin-bottom: 6px;
+    color: var(--warna-utama-terang);
+    font-size: 12px;
+}
+
+.item-info input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 10px;
+    outline: 0;
+    background: var(--warna-taupe);
+    font-size: 12px;
+}
+
+.item-aksi {
+    display: grid;
+    gap: 8px;
+    justify-items: end;
+}
+
+.jumlah {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.jumlah button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--warna-utama);
+    color: #fff;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.tombol-hapus {
+    color: #c81100;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Tombol Simpan yang disembunyikan dari layar (tombol bawaan saat menekan Enter) */
+.tombol-bawaan {
+    position: absolute;
+    left: -9999px;
+}
+
+.field select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 0;
+    border-radius: 12px;
+    outline: 0;
+    background: var(--warna-taupe);
+    font-size: 14px;
+}
+
+.ringkasan-total {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    color: #fff;
+    font-size: 18px;
+}
+
+/* Struk pesanan */
+.kartu-struk {
+    max-width: 440px;
+    margin: 20px auto;
+    padding: 24px;
+    border-radius: 24px;
+    background: var(--warna-krem);
+}
+
+.kartu-struk h1 {
+    font-family: var(--font-judul);
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.kode-pesanan {
+    margin: 8px 0 2px;
+    color: var(--warna-utama);
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.status-pesanan {
+    margin-bottom: 16px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.daftar-struk {
+    padding: 12px 0;
+    border-top: 1px dashed var(--warna-teks);
+    border-bottom: 1px dashed var(--warna-teks);
+    list-style: none;
+}
+
+.daftar-struk li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 0;
+    font-size: 14px;
+}
+
+.daftar-struk small {
+    display: block;
+    color: var(--warna-utama-terang);
+    font-size: 11px;
+}
+
+.baris-struk {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Tanda * merah pada isian wajib */
+.wajib {
+    color: #a31d1d;
+}
+
+/* Kolom password + tombol mata */
+.kolom-password {
+    display: flex;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--warna-taupe);
+}
+
+.kolom-password:focus-within {
+    box-shadow: 0 0 0 2px var(--warna-krem);
+}
+
+.kolom-password input {
+    flex: 1;
+    min-width: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.kolom-password input:focus {
+    box-shadow: none;
+}
+
+.lihat-password {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    border-left: 1px solid var(--warna-teks);
+}
+
+.lihat-password svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: var(--warna-teks);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* Keranjang: baris "Akan Diambil Pada Jam" */
+.baris-jam {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: var(--warna-krem);
+}
+
+.baris-jam label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.baris-jam select {
+    padding: 4px 8px;
+    border: 1px solid var(--warna-utama);
+    border-radius: 4px;
+    outline: 0;
+    background: transparent;
+    color: var(--warna-utama);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ==========================================================
+   10. Status pesanan & riwayat transaksi
+   ========================================================== */
+
+/* Layar status: menunggu / diterima / ditolak */
+.layar-status {
+    display: grid;
+    justify-items: center;
+    gap: 24px;
+    text-align: center;
+}
+
+.putaran {
+    width: 48px;
+    height: 48px;
+    border: 5px solid transparent;
+    border-top-color: var(--warna-krem);
+    border-radius: 50%;
+    animation: putar 1s linear infinite;
+}
+
+@keyframes putar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ikon-status {
+    display: grid;
+    place-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.ikon-status svg {
+    width: 44px;
+    height: 44px;
+    fill: none;
+    stroke: var(--warna-teks);
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.kartu-status {
+    width: 100%;
+    padding: 36px 20px;
+    border-radius: 16px;
+    background: var(--warna-krem);
+}
+
+.kartu-status h1,
+.kartu-status p {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.kartu-status p + p,
+.kartu-status h1 + p {
+    margin-top: 12px;
+}
+
+.kartu-status .kode {
+    color: var(--warna-utama);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.kartu-status .redup {
+    color: #a77f75;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.tombol-status-bungkus {
+    width: 82%;
+}
+
+.tombol-status {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    background: var(--warna-utama);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Riwayat transaksi */
+.tombol-kembali {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    margin: 8px 0 16px;
+    border-radius: 50%;
+    background: var(--warna-krem);
+    font-size: 18px;
+}
+
+.daftar-riwayat {
+    display: grid;
+    gap: 16px;
+    list-style: none;
+}
+
+.baris-riwayat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 20px;
+    background: var(--warna-krem);
+}
+
+.baris-riwayat h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.baris-riwayat .tanggal {
+    color: var(--warna-utama);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.baris-riwayat .nominal {
+    color: var(--warna-gelap);
+    font-size: 16px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.riwayat-kosong {
+    padding: 40px 0;
+    color: var(--warna-krem);
+    text-align: center;
 }
