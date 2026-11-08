@@ -866,3 +866,52 @@ main.tengah {
     color: var(--warna-krem);
     text-align: center;
 }
+
+
+
+/* ---------- 11. Profil ---------- */
+.pesan-sukses {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--warna-krem);
+    color: #1f7a3a;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.kartu-profil {
+    max-width: 420px;
+    margin: 16px auto 0;
+    text-align: center;
+}
+
+.avatar-profil {
+    display: grid;
+    place-items: center;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: var(--warna-krem);
+    color: var(--warna-utama);
+    font-family: var(--font-judul);
+    font-size: 44px;
+}
+
+.nama-profil {
+    color: var(--warna-krem);
+    font-family: var(--font-judul);
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.email-profil,
+.gabung-profil {
+    color: var(--warna-taupe);
+    font-size: 14px;
+}
+
+.gabung-profil {
+    margin-top: 4px;
+}

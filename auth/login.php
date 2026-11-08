@@ -27,6 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $error = 'Username atau password salah.';
 }
 
+// Pesan sukses (mis. setelah reset password), tampil sekali saja
+$sukses = $_SESSION['pesan_sukses'] ?? '';
+unset($_SESSION['pesan_sukses']);
+
 $judul = 'Login';
 $polos = true;
 $skrip = ['lihat-password.js'];
@@ -34,6 +38,10 @@ require __DIR__ . '/../includes/header.php';
 ?>
 
         <h1 class="judul-auth">Selamat Datang di<br>Kantin JTI</h1>
+
+        <?php if ($sukses): ?>
+            <div class="pesan-sukses" role="status"><?= e($sukses) ?></div>
+        <?php endif; ?>
 
         <?php if ($error): ?>
             <div class="pesan-error" role="alert"><?= e($error) ?></div>

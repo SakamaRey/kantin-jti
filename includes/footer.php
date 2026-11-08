@@ -26,7 +26,7 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>
             <span>Transaksi</span>
         </a>
-        <a href="#" class="<?= ($aktif ?? 'home') === 'profil' ? 'aktif' : '' ?>">
+        <a href="<?= e(url('pelanggan/profil.php')) ?>" class="<?= ($aktif ?? 'home') === 'profil' ? 'aktif' : '' ?>">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-3.5 3.5-5.5 8-5.5s8 2 8 5.5z"/></svg>
             <span>Profile</span>
         </a>

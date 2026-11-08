@@ -31,7 +31,7 @@ $users   = pengguna_saat_ini();
             <nav class="nav-atas" aria-label="Navigasi utama">
                 <a href="<?= e(url('index.php')) ?>" class="<?= $aktif === 'home' ? 'aktif' : '' ?>">Home</a>
                 <a href="<?= e(url('pelanggan/riwayat.php')) ?>" class="<?= $aktif === 'transaksi' ? 'aktif' : '' ?>">Transaksi</a>
-                <a href="#" class="<?= $aktif === 'profil' ? 'aktif' : '' ?>">Profile</a>
+                <a href="<?= e(url('pelanggan/profil.php')) ?>" class="<?= $aktif === 'profil' ? 'aktif' : '' ?>">Profile</a>
             </nav>
 
             <?php if ($tampilCari): ?>
