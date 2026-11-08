@@ -16,7 +16,7 @@ $id = (int) ($_POST['id'] ?? 0);
 $stmt = $pdo->prepare(
     "UPDATE pesanan SET status = 'dibatalkan' WHERE id_pesanan = ? AND users_id = ? AND status = 'menunggu'"
 );
-$stmt->execute([$id, pengguna_saat_ini()['id']]);
+$stmt->execute([$id, pengguna_saat_ini()['users_id']]);
 
 // Halaman status menentukan tujuan: dibatalkan -> katalog, sudah diterima -> layar diterima
 alihkan('pelanggan/pesanan-status.php?id=' . $id);

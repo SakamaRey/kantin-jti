@@ -15,7 +15,7 @@ if (!$users) {
 }
 
 // Hanya pesanan milik pengguna yang sedang login
-$stmt = $pdo->prepare('SELECT status FROM pesanan WHERE id_pesanan = ? AND pengguna_id = ?');
-$stmt->execute([(int) ($_GET['users_id'] ?? 0), $users['users_id']]);
+$stmt = $pdo->prepare('SELECT status FROM pesanan WHERE id_pesanan = ? AND users_id = ?');
+$stmt->execute([(int) ($_GET['id'] ?? 0), $users['users_id']]);
 
 echo json_encode(['status' => $stmt->fetchColumn() ?: null]);
