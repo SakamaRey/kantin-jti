@@ -21,7 +21,10 @@ CREATE TABLE users(
 	password varchar (100) NOT NULL ,
 	role varchar(15) NOT NULL DEFAULT 'pelanggan'
 	CHECK (role IN('pelanggan', 'admin')),
-	create_account TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+	create_account TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	security_question VARCHAR(255) NOT NULL,
+	security_answer VARCHAR(255) NOT NULL,
+	no_hp varchar(15);
 );
 
 CREATE TABLE pesanan(
