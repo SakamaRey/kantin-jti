@@ -1,17 +1,4 @@
--- Database: SIMANTIN-JTI
-
--- DROP DATABASE IF EXISTS "SIMANTIN-JTI";
-
-CREATE DATABASE "SIMANTIN-JTI"
-    WITH
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'Indonesian_Indonesia.1252'
-    LC_CTYPE = 'Indonesian_Indonesia.1252'
-    LOCALE_PROVIDER = 'libc'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1
-    IS_TEMPLATE = False;
+-- Database: kantin_jti
 
 
 CREATE TABLE users(
