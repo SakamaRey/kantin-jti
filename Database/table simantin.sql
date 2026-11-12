@@ -24,7 +24,7 @@ CREATE TABLE users(
 	create_account TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	security_question VARCHAR(255) NOT NULL,
 	security_answer VARCHAR(255) NOT NULL,
-	no_hp varchar(15);
+	no_hp varchar(15)
 );
 
 CREATE TABLE pesanan(
