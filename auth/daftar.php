@@ -99,12 +99,12 @@ require __DIR__ . '/../includes/header.php';
             <?php input_password('ulangi_password', 'Confirm Password', 'contoh: Carmen****', true); ?>
 
             <div class="field">
-                <label for="pertanyaan">Masukkan pertanyaan <span class="wajib">*</span></label>
+                <label for="pertanyaan">Buat Pertanyaan Verifikasi <span class="wajib">*</span></label>
                 <input type="text" id="pertanyaan" name="pertanyaan" value="<?= e($pertanyaan) ?>" maxlength="100" placeholder="Contoh: tempat asal saya?" required> 
             </div>
 
             <div class="field">
-                <label for="jawaban"> Jawaban <span class="wajib">*</span></label>
+                <label for="jawaban"> Jawaban Pertanyaan Verifikasi <span class="wajib">*</span></label>
                 <input type="text" id="jawaban" name="jawaban" value="<?=  e($jawaban) ?>" placeholder="Masukkan jawaban" required>
             </div>
 
