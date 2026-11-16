@@ -6,46 +6,45 @@ if (pengguna_saat_ini()) {
     alihkan('pelanggan/profil.php');
 }
 
-$errors   = [];
-$email    = '';
-$username = '';
-$pertanyaan = null; //nilai biarkan null 
+$errors     = [];
+$email      = '';
+$username   = '';
+$pertanyaan = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email    = trim($_POST['email'] ?? '');
-    $username = trim($_POST['username'] ?? '');
-    $baru     = $_POST['password_baru'] ?? '';
-    $ulang    = $_POST['ulangi_password'] ?? '';
-    $langkah = $_POST['langkah'] ?? '1'; // tambahan untuk pertanyaan dan jawaban
-    $jawaban = $_POST['jawaban'] ?? '';
+    $email      = trim($_POST['email'] ?? '');
+    $username   = trim($_POST['username'] ?? '');
+    $baru       = $_POST['password_baru'] ?? '';
+    $ulang      = $_POST['ulangi_password'] ?? '';
+    $langkah    = $_POST['langkah'] ?? '1';
+    $jawaban    = $_POST['jawaban'] ?? '';
 
     if (!csrf_valid()) {
         $errors[] = 'Sesi form tidak valid, muat ulang halaman.';
     }
-    if ($langkah == '2' && strlen($baru) < 6) {
+    if ($langkah === '2' && strlen($baru) < 6) {
         $errors[] = 'Password baru minimal 6 karakter.';
     }
-    if ($langkah == '2' && $baru !== $ulang) {
+    if ($langkah === '2' && $baru !== $ulang) {
         $errors[] = 'Konfirmasi password tidak sama.';
     }
 
-    // Email DAN username harus cocok pada akun yang sama
     if (!$errors) {
         $stmt = $pdo->prepare('SELECT users_id, security_question, security_answer FROM users WHERE email = ? AND username = ?');
         $stmt->execute([$email, $username]);
         $akun = $stmt->fetch();
-        $id = $akun['users_id'] ?? null;
+        $id   = $akun['users_id'] ?? null;
 
         if (!$id) {
             $errors[] = 'Email dan username tidak cocok dengan akun mana pun.';
-        } else if (empty($akun['security_answers'])) {//kondisi untuk error saat pertanyaan dan jawaban salah
-            $errors[] = 'Anda belum membuat pertanyaan verifikasi';
-        }else if ($langkah == '1') {
+        } elseif (empty($akun['security_question']) || empty($akun['security_answer'])) { // PERBAIKAN TYPO: security_answer tanpa 's'
+            $errors[] = 'Akun ini belum memiliki pertanyaan verifikasi.';
+        } elseif ($langkah === '1') {
             $pertanyaan = $akun['security_question'];
-        }else if (!password_verify(normalisasi_jawaban($jawaban), $akun['security_answer'])) {
-             $pertanyaan = $akun['security_question'];
-             $errors[] = 'Jawaban salah';//
-        }else{
+        } elseif (!password_verify(normalisasi_jawaban($jawaban), $akun['security_answer'])) {
+            $pertanyaan = $akun['security_question'];
+            $errors[]   = 'Jawaban pengaman salah.';
+        } else {
             $stmt = $pdo->prepare('UPDATE users SET password = ? WHERE users_id = ?');
             $stmt->execute([password_hash($baru, PASSWORD_DEFAULT), $id]);
 
@@ -54,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    //fallback jika ada error akan menampilkan form 2
+    // Fallback jika terjadi error validasi di langkah 2 agar form langkah 2 tetap tampil
     if ($langkah === '2' && $pertanyaan === null) {
         $pertanyaan = trim($_POST['pertanyaan'] ?? '');
     }
@@ -82,36 +81,33 @@ require __DIR__ . '/../includes/header.php';
 
         <form method="post">
             <input type="hidden" name="csrf" value="<?= e(token_csrf()) ?>">
-            
-            <input type="hidden" name="langkah" value="<?= $pertanyaan == null ? '1' : '2'?>"> 
-            <?php if ($pertanyaan != null): ?> 
-                <input type="hidden" name="pertanyaan" value="<?= e($pertanyaan) ?>"> 
+            <input type="hidden" name="langkah" value="<?= $pertanyaan === null ? '1' : '2' ?>">
+            <?php if ($pertanyaan !== null): ?>
+                <input type="hidden" name="pertanyaan" value="<?= e($pertanyaan) ?>">
             <?php endif; ?>
 
             <div class="field">
                 <label for="email">Email <span class="wajib">*</span></label>
-                <input type="email" id="email" name="email" value="<?= e($email) ?>" placeholder="Email saat mendaftar" required>
+                <input type="email" id="email" name="email" value="<?= e($email) ?>" placeholder="Email saat mendaftar" <?= $pertanyaan !== null ? 'readonly' : 'required' ?>>
             </div>
 
             <div class="field">
                 <label for="username">Username <span class="wajib">*</span></label>
-                <input type="text" id="username" name="username" value="<?= e($username) ?>" placeholder="Username akunmu" required>
+                <input type="text" id="username" name="username" value="<?= e($username) ?>" placeholder="Username akunmu" <?= $pertanyaan !== null ? 'readonly' : 'required' ?>>
             </div>
 
-            
-            <?php if ($pertanyaan != null): ?>
+            <?php if ($pertanyaan !== null): ?>
                 <div class="field">
-                    <label for="jawaban"><?= e($pertanyaan) ?></label>
-                    <input type="text" id="jawaban" name="jawaban" placeholder="Masukkan jawaban" required>
+                    <label for="jawaban"><?= e($pertanyaan) ?> <span class="wajib">*</span></label>
+                    <input type="text" id="jawaban" name="jawaban" placeholder="Masukkan jawaban" required autofocus>
                 </div>
 
-            <?php input_password('password_baru', 'New Password', 'Minimal 6 karakter', true); ?>
-            <?php input_password('ulangi_password', 'Confirm Password', 'Ulangi password baru', true); ?>
-
+                <?php input_password('password_baru', 'New Password', 'Minimal 6 karakter', true); ?>
+                <?php input_password('ulangi_password', 'Confirm Password', 'Ulangi password baru', true); ?>
             <?php endif; ?>
 
             <div class="aksi-auth">
-                <button type="submit" class="tombol"><?=  $pertanyaan === null ? 'Lanjut' : 'Reset Password' ?></button>
+                <button type="submit" class="tombol"><?= $pertanyaan === null ? 'Lanjut' : 'Reset Password' ?></button>
                 <a href="<?= e(url('auth/login.php')) ?>" class="tombol tombol-sekunder">Batal</a>
             </div>
         </form>

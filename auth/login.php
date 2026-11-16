@@ -65,5 +65,5 @@ require __DIR__ . '/../includes/header.php';
                 <a href="<?= e(url('auth/daftar.php')) ?>" class="tombol tombol-sekunder">Sign Up</a>
             </div>
         </form>
-
+        <p class="lupa-password"><a href="<?= e(url('auth/lupa-password.php')) ?>">Lupa Password?</a></p>
 <?php require __DIR__ . '/../includes/footer.php'; ?>
