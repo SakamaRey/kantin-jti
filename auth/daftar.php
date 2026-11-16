@@ -17,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
     $ulang    = $_POST['ulangi_password'] ?? '';
-    $pertanyaan = trim($_POST['Pertanyaan'] ?? ''); // tambahan untuk pertanyaan dan jawaban
-    $jawaban = $_POST['Jawaban'] ?? '';
+    $pertanyaan = trim($_POST['pertanyaan'] ?? ''); // tambahan untuk pertanyaan dan jawaban
+    $jawaban = $_POST['jawaban'] ?? '';
 
     // 1. Validasi isian
     if (!csrf_valid()) {
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Konfirmasi password tidak sama.';
     }
     if (mb_strlen($pertanyaan) < 10 || mb_strlen($pertanyaan) > 100) {
-        $errors[] = 'Pertanyaan harus lebih dari 10 atau kurang dari 100 pertanyaan';
+        $errors[] = 'Pertanyaan harus lebih dari 10 atau kurang dari 100 karakter';
     }
     if (mb_strlen(trim($jawaban)) < 5) {
         $errors[] = 'Jawaban minimal terdiri dari 5 karakter';
@@ -99,13 +99,13 @@ require __DIR__ . '/../includes/header.php';
             <?php input_password('ulangi_password', 'Confirm Password', 'contoh: Carmen****', true); ?>
 
             <div class="field">
-                <label for="pertanyaan">Masukkan pertanyaan <span class="Wajib">*</span></label>
-                <input type="text" id="pertnyaan" name="pertanyaan" value="<?= e($pertanyaan) ?>" maxlength="250" placeholder="Contoh: tempat asal saya?" require> 
+                <label for="pertanyaan">Masukkan pertanyaan <span class="wajib">*</span></label>
+                <input type="text" id="pertanyaan" name="pertanyaan" value="<?= e($pertanyaan) ?>" maxlength="100" placeholder="Contoh: tempat asal saya?" required> 
             </div>
 
             <div class="field">
                 <label for="jawaban"> Jawaban <span class="wajib">*</span></label>
-                <input type="text" id="jawaban" name="jawaban" value="<?=  e($jawaban) ?>" placeholder="Masukkan jawaban" require>
+                <input type="text" id="jawaban" name="jawaban" value="<?=  e($jawaban) ?>" placeholder="Masukkan jawaban" required>
             </div>
 
             <div class="aksi-auth">

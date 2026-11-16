@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $baru     = $_POST['password_baru'] ?? '';
     $ulang    = $_POST['ulangi_password'] ?? '';
     $langkah = $_POST['langkah'] ?? '1'; // tambahan untuk pertanyaan dan jawaban
-    $jawaban = $_POST['Jawaban'] ?? '';
+    $jawaban = $_POST['jawaban'] ?? '';
 
     if (!csrf_valid()) {
         $errors[] = 'Sesi form tidak valid, muat ulang halaman.';
@@ -38,11 +38,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!$id) {
             $errors[] = 'Email dan username tidak cocok dengan akun mana pun.';
-        } else if (empty($akun ['security_answers'])) {//kondisi untuk error saat pertanyaan dan jawaban salah
+        } else if (empty($akun['security_answers'])) {//kondisi untuk error saat pertanyaan dan jawaban salah
             $errors[] = 'Anda belum membuat pertanyaan verifikasi';
         }else if ($langkah == '1') {
-            $pertanyaan[] = $akun['security_question'];
-        }else if (!password_verify(normalisasi_jawaban($jawaban), $akun['security_answers'])) {
+            $pertanyaan = $akun['security_question'];
+        }else if (!password_verify(normalisasi_jawaban($jawaban), $akun['security_answer'])) {
              $pertanyaan = $akun['security_question'];
              $errors[] = 'Jawaban salah';//
         }else{
@@ -85,7 +85,7 @@ require __DIR__ . '/../includes/header.php';
             
             <input type="hidden" name="langkah" value="<?= $pertanyaan == null ? '1' : '2'?>"> 
             <?php if ($pertanyaan != null): ?> 
-                <input type="hidden" name="pertanyaan" value="<? e($pertanyaan) ?>"> 
+                <input type="hidden" name="pertanyaan" value="<?= e($pertanyaan) ?>"> 
             <?php endif; ?>
 
             <div class="field">
@@ -102,7 +102,7 @@ require __DIR__ . '/../includes/header.php';
             <?php if ($pertanyaan != null): ?>
                 <div class="field">
                     <label for="jawaban"><?= e($pertanyaan) ?></label>
-                    <input type="text" id="jawaban" name="jawaban" placeholder="Masukkan jawaban" require>
+                    <input type="text" id="jawaban" name="jawaban" placeholder="Masukkan jawaban" required>
                 </div>
 
             <?php input_password('password_baru', 'New Password', 'Minimal 6 karakter', true); ?>
