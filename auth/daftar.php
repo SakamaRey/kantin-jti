@@ -9,12 +9,16 @@ if (pengguna_saat_ini()) {
 $errors   = [];
 $email    = '';
 $username = '';
+$pertanyaan = ''; //tambahan variabel untuk pertanyaan dan jawaban 
+$jawaban = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email    = trim($_POST['email'] ?? '');
     $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
     $ulang    = $_POST['ulangi_password'] ?? '';
+    $pertanyaan = trim($_POST['pertanyaan'] ?? ''); // tambahan untuk pertanyaan dan jawaban
+    $jawaban = $_POST['jawaban'] ?? '';
 
     // 1. Validasi isian
     if (!csrf_valid()) {
@@ -32,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password !== $ulang) {
         $errors[] = 'Konfirmasi password tidak sama.';
     }
+    if (mb_strlen($pertanyaan) < 10 || mb_strlen($pertanyaan) > 100) {
+        $errors[] = 'Pertanyaan harus lebih dari 10 atau kurang dari 100 karakter';
+    }
+    if (mb_strlen(trim($jawaban)) < 5) {
+        $errors[] = 'Jawaban minimal terdiri dari 5 karakter';
+    }
 
     // 2. Cek email / username sudah dipakai atau belum
     if (!$errors) {
@@ -45,9 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 3. Simpan, lalu langsung login
     if (!$errors) {
         $stmt = $pdo->prepare(
-            'INSERT INTO users (email, username, password) VALUES (?, ?, ?) RETURNING users_id, username, role'
+            'INSERT INTO users (email, username, password, security_question, security_answer) VALUES (?, ?, ?, ?, ?) RETURNING users_id, username, role'
         );
-        $stmt->execute([$email, $username, password_hash($password, PASSWORD_DEFAULT)]);
+        $stmt->execute([$email, $username, password_hash($password, PASSWORD_DEFAULT), $pertanyaan, password_hash(normalisasi_jawaban($jawaban), PASSWORD_DEFAULT)]);
 
         masukkan_session($stmt->fetch());
         alihkan('index.php');
@@ -87,6 +97,16 @@ require __DIR__ . '/../includes/header.php';
 
             <?php input_password('password', 'New Password', 'contoh: Carmen****', true); ?>
             <?php input_password('ulangi_password', 'Confirm Password', 'contoh: Carmen****', true); ?>
+
+            <div class="field">
+                <label for="pertanyaan">Buat Pertanyaan Verifikasi <span class="wajib">*</span></label>
+                <input type="text" id="pertanyaan" name="pertanyaan" value="<?= e($pertanyaan) ?>" maxlength="100" placeholder="Contoh: tempat asal saya?" required> 
+            </div>
+
+            <div class="field">
+                <label for="jawaban"> Jawaban Pertanyaan Verifikasi <span class="wajib">*</span></label>
+                <input type="text" id="jawaban" name="jawaban" value="<?=  e($jawaban) ?>" placeholder="Masukkan jawaban" required>
+            </div>
 
             <div class="aksi-auth">
                 <button type="submit" class="tombol">Continue</button>

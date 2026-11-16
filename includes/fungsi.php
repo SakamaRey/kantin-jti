@@ -134,3 +134,8 @@ function tanggal_pendek($waktu)
 {
     return date('d M Y', strtotime($waktu));
 }
+
+// function pertanyaan untuk users
+function normalisasi_jawaban($teks) {
+    return mb_strtolower(trim((string) $teks), 'UTF-8');
+}
