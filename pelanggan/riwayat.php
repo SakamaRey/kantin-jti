@@ -24,7 +24,6 @@ $skrip      = ['cari.js'];
 require __DIR__ . '/../includes/header.php';
 ?>
 
-        <a href="<?= e(url('index.php')) ?>" class="tombol-kembali" aria-label="Kembali ke menu">&larr;</a>
 
         <?php if (!$daftarRiwayat): ?>
 

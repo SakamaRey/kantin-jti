@@ -88,7 +88,7 @@ button {
     display: none;
     font-family: var(--font-judul);
     font-size: 28px;
-    color: var(--warna-krem);
+    color: var(--warna-utama);
 }
 
 .nav-atas {
@@ -295,6 +295,10 @@ main {
     }
 
     .nav-atas {
+        margin-right: auto;   
+    }
+
+    .nav-atas {
         display: flex;
         gap: 24px;
         margin-left: 12px;
@@ -302,7 +306,7 @@ main {
     }
 
     .nav-atas a {
-        color: var(--warna-krem);
+        color: var(--warna-gelap);
         opacity: 0.8;
     }
 
@@ -324,14 +328,20 @@ main {
     }
 
     .bar-keranjang {
-        right: 24px;
+        right: auto;
         bottom: 24px;
-        left: auto;
+        left: 50%;
+        transform: translateX(-50%);
         width: 380px;
     }
 
     main {
         padding-bottom: 110px;
+    }
+
+    .header {
+        background: #b9a7a3;     
+        padding: 20px 0 20px;    
     }
 }
 
