@@ -3,4 +3,4 @@
 .DS_Store
 Thumbs.db
 .vscode/
-koneksi.php
+config/koneksi.php
