@@ -47,4 +47,5 @@ INSERT INTO menu (nama_menu, deskripsi, harga, gambar, tersedia) VALUES
     ('Paket 1', 'Nasi + Ayam Pedas Kemangi + Telur',           10000, 'paket-1.jpg', true),
     ('Paket 2', 'Nasi Goreng + Telur + Sosis + Udang + Sayur', 15000, 'paket-2.jpg',true),
     ('Paket 3', 'Nasi + Ayam Bawang Krispi',                   10000, 'paket-3.jpg',true),
+    ('Paket 5', 'Nasi + Ayam Pedas Kemangi + Telur',           10000, 'paket-1.jpg', true),
     ('Paket 4', 'Mie Pangsit + Ayam Kecap + Sayur',            15000, 'paket-4.jpg', true);
