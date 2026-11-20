@@ -843,16 +843,6 @@ main.tengah {
 }
 
 /* Riwayat transaksi */
-.tombol-kembali {
-    display: grid;
-    place-items: center;
-    width: 36px;
-    height: 36px;
-    margin: 8px 0 16px;
-    border-radius: 50%;
-    background: var(--warna-krem);
-    font-size: 18px;
-}
 
 .daftar-riwayat {
     display: grid;
