@@ -706,6 +706,22 @@ main.tengah {
     stroke-linejoin: round;
 }
 
+/* Link "Lupa Password?" di halaman login */
+.lupa-password {
+    margin-top: -6px;      
+    text-align: right;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.lupa-password a {
+    color: #fff;
+}
+
+.lupa-password a:hover {
+    text-decoration: underline;
+}
+
 /* Keranjang: baris "Akan Diambil Pada Jam" */
 .baris-jam {
     display: flex;

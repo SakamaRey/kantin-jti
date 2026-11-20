@@ -60,10 +60,11 @@ require __DIR__ . '/../includes/header.php';
                 <input type="password" id="password" name="password" placeholder="contoh: Carmen****" required>
             </div>
 
+            <p class="lupa-password"><a href="<?= e(url('auth/lupa-password.php')) ?>">Lupa Password?</a></p>
             <div class="aksi-auth">
                 <button type="submit" class="tombol">Login</button>
                 <a href="<?= e(url('auth/daftar.php')) ?>" class="tombol tombol-sekunder">Sign Up</a>
             </div>
         </form>
-        <p class="lupa-password"><a href="<?= e(url('auth/lupa-password.php')) ?>">Lupa Password?</a></p>
+        
 <?php require __DIR__ . '/../includes/footer.php'; ?>
