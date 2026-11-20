@@ -50,7 +50,6 @@ $skrip = ['lihat-password.js'];
 require __DIR__ . '/../includes/header.php';
 ?>
 
-        <a href="<?= e(url('pelanggan/profil.php')) ?>" class="tombol-kembali" aria-label="Kembali ke profil">&larr;</a>
 
         <h1 class="judul-auth">Ganti Password</h1>
 

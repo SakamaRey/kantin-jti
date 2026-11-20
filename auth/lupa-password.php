@@ -64,8 +64,7 @@ $polos = true;
 $skrip = ['lihat-password.js'];
 require __DIR__ . '/../includes/header.php';
 ?>
-
-        <a href="<?= e(url('auth/login.php')) ?>" class="tombol-kembali" aria-label="Kembali ke login">&larr;</a>
+    <div class="kartu-auth">
 
         <h1 class="judul-auth">Lupa Password</h1>
 
@@ -111,5 +110,7 @@ require __DIR__ . '/../includes/header.php';
                 <a href="<?= e(url('auth/login.php')) ?>" class="tombol tombol-sekunder">Batal</a>
             </div>
         </form>
+
+    </div>
 
 <?php require __DIR__ . '/../includes/footer.php'; ?>
